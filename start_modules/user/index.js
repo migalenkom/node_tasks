@@ -1,14 +1,17 @@
-var translation = require('./ru')
+var log = require('logger')(module);
 
-function User(name){
+var db = require('db')
+
+function User(name) {
   this.name = name;
 }
 
-User.prototype.helo = function(who){
-  console.log(translation.Hello + ", " + who.name);
+User.prototype.helo = function(who) {
+  log(db.getTranslation("Hello") + ", " + who.name);
 };
+// console.log("User is required");
 
-console.log("User is required");
-
-exports.User = User
+module.exports = User;
+// exports.User = User
 // global.User = User
+// console.log(module);

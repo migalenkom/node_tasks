@@ -1,6 +1,19 @@
-var user = require('./user')
+var log = require('logger')(module);
+var db = require('db');
+db.connect();
 
-var world =  new user.User("World");
-var me = new user.User("Mike");
+var User = require('./user');
 
-world.helo(me);
+function run() {
+  var world = new User("World");
+  var me = new User("Mike");
+
+  world.helo(me);
+  log(db.getTranslation("Run seccessfull"));
+}
+
+if (module.parent) {
+  exports.run = run;
+} else {
+  run();
+}
